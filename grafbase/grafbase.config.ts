@@ -7,7 +7,7 @@ const User = g.model('User', {
   avatarUrl: g.url(),
   description: g.string().length({ min: 2, max: 1000 }).optional(),
   githubUrl: g.url().optional(),
-  linkedinUrl: g.url().optional(),
+  linkedinUrl: g.url().optional(), 
   projects: g.relation(() => Project).list().optional(),
 }).auth((rules) => {
   rules.public().read()
@@ -16,10 +16,10 @@ const User = g.model('User', {
 // @ts-ignore
 const Project = g.model('Project', {
   title: g.string().length({ min: 3 }),
-  description: g.string(),
+  description: g.string(), 
   image: g.url(),
-  liveSiteUrl: g.url(),
-  githubUrl: g.url(),
+  liveSiteUrl: g.url(), 
+  githubUrl: g.url(), 
   category: g.string().search(),
   createdBy: g.relation(() => User),
 }).auth((rules) => {
@@ -29,7 +29,7 @@ const Project = g.model('Project', {
 
 const jwt = auth.JWT({
   issuer: 'grafbase',
-  secret: g.env('NEXTAUTH_SECRET')
+  secret:  g.env('NEXTAUTH_SECRET')
 })
 
 export default config({
@@ -39,3 +39,4 @@ export default config({
     rules: (rules) => rules.private()
   },
 })
+

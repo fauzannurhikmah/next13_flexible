@@ -16,13 +16,13 @@ const ProfilePage = ({ user }: Props) => (
                 <Image src={user?.avatarUrl} width={100} height={100} className="rounded-full" alt="user image" />
                 <p className="text-4xl font-bold mt-10">{user?.name}</p>
                 <p className="md:text-5xl text-3xl font-extrabold md:mt-10 mt-5 max-w-lg">I’m Software Engineer at JSM 👋</p>
-
+                
                 <div className="flex mt-8 gap-5 w-full flex-wrap">
-                    <Button
-                        title="Follow"
-                        leftIcon="/plus-round.svg"
-                        bgColor="bg-light-white-400 !w-max"
-                        textColor="text-black-100"
+                    <Button 
+                        title="Follow" 
+                        leftIcon="/plus-round.svg" 
+                        bgColor="bg-light-white-400 !w-max" 
+                        textColor="text-black-100" 
                     />
                     <Link href={`mailto:${user?.email}`}>
                         <Button title="Hire Me" leftIcon="/email.svg" />
@@ -47,12 +47,12 @@ const ProfilePage = ({ user }: Props) => (
                     className='rounded-xl'
                 />
             )}
-        </section>
+       </section>
 
-        <section className="flexStart flex-col lg:mt-28 mt-16 w-full">
-            <p className="w-full text-left text-lg font-semibold">Recent Work</p>
-
-            <div className="profile_projects">
+       <section className="flexStart flex-col lg:mt-28 mt-16 w-full">
+           <p className="w-full text-left text-lg font-semibold">Recent Work</p>
+           
+           <div className="profile_projects">
                 {user?.projects?.edges?.map(
                     ({ node }: { node: ProjectInterface }) => (
                         <ProjectCard
@@ -67,8 +67,8 @@ const ProfilePage = ({ user }: Props) => (
                     )
                 )}
             </div>
-        </section>
-    </section>
+       </section>
+   </section>
 )
 
 export default ProfilePage

@@ -1,22 +1,30 @@
-import { ProjectInterface } from "@/common.types";
-import Modal from "@/components/Modal"
-import ProjectForm from "@/components/ProjectForm"
-import { getProjectDetails } from "@/libs/action";
-import { getCurrentUser } from "@/libs/session"
 import { redirect } from "next/navigation";
 
+import Modal from "@/components/Modal";
+import ProjectForm from "@/components/ProjectForm";
+import { getCurrentUser } from "@/lib/session";
+import { getProjectDetails } from "@/lib/actions";
+import { ProjectInterface } from "@/common.types";
+
 const EditProject = async ({ params: { id } }: { params: { id: string } }) => {
-    const session = await getCurrentUser();
-    if (!session?.user) redirect('/')
+  const session = await getCurrentUser();
 
-    const result = await getProjectDetails(id) as { project?: ProjectInterface }
+  if (!session?.user) redirect("/")
 
-    return (
-        <Modal>
-            <h3 className="modal-head-text">Edit Project</h3>
-            <ProjectForm type="edit" session={session} project={result?.project} />
-        </Modal>
-    )
-}
+  const result = await getProjectDetails(id) as { project?: ProjectInterface };
+  
+  if (!result?.project) return (
+    <p className="no-result-text">Failed to fetch project info</p>
+  )
 
-export default EditProject
+  return (
+    <Modal>
+      <h3 className="modal-head-text">Edit Project</h3>
+
+      <ProjectForm type="edit" session={session} project={result?.project} />
+    </Modal>
+  );
+};
+
+export default EditProject;
+
